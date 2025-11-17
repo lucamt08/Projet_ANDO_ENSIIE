@@ -70,3 +70,9 @@ plt.yticks(fontsize=8)
 plt.tight_layout()
 plt.show()
 
+plt.figure(figsize=(8,6))
+sns.boxplot(x=alz_df['Diagnosis'], y=alz_df['ADL'], data=alz_df)
+plt.show()
+
+
+
