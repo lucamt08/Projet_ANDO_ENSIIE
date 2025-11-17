@@ -88,42 +88,45 @@ print("Top 10 correlated features:")
 print(correlations.head(11))  # Includes Diagnosis itself
 
 
+
+
+
 # Define variable categories
-demographic_vars = ['Age', 'Gender', 'Ethnicity', 'EducationLevel']
-lifestyle_vars = ['BMI', 'Smoking', 'AlcoholConsumption', 'PhysicalActivity', 'DietQuality', 'SleepQuality']
-medical_history_vars = ['FamilyHistoryAlzheimers', 'CardiovascularDisease', 'Diabetes', 'Depression', 
-                       'HeadInjury', 'Hypertension']
-vital_signs_vars = ['SystolicBP', 'DiastolicBP', 'CholesterolTotal', 'CholesterolLDL', 
-                   'CholesterolHDL', 'CholesterolTriglycerides']
-cognitive_vars = ['MMSE', 'FunctionalAssessment', 'MemoryComplaints', 'BehavioralProblems', 
-                 'ADL', 'Confusion', 'Disorientation', 'PersonalityChanges', 
-                 'DifficultyCompletingTasks', 'Forgetfulness']
-target_var = ['Diagnosis']
+# demographic_vars = ['Age', 'Gender', 'Ethnicity', 'EducationLevel']
+# lifestyle_vars = ['BMI', 'Smoking', 'AlcoholConsumption', 'PhysicalActivity', 'DietQuality', 'SleepQuality']
+# medical_history_vars = ['FamilyHistoryAlzheimers', 'CardiovascularDisease', 'Diabetes', 'Depression', 
+#                        'HeadInjury', 'Hypertension']
+# vital_signs_vars = ['SystolicBP', 'DiastolicBP', 'CholesterolTotal', 'CholesterolLDL', 
+#                    'CholesterolHDL', 'CholesterolTriglycerides']
+# cognitive_vars = ['MMSE', 'FunctionalAssessment', 'MemoryComplaints', 'BehavioralProblems', 
+#                  'ADL', 'Confusion', 'Disorientation', 'PersonalityChanges', 
+#                  'DifficultyCompletingTasks', 'Forgetfulness']
+# target_var = ['Diagnosis']
 
-# Create correlation matrices for each category
-categories = {
-    'Demographic Variables': demographic_vars + target_var,
-    'Lifestyle Variables': lifestyle_vars + target_var,
-    'Medical History': medical_history_vars + target_var,
-    'Vital Signs & Cholesterol': vital_signs_vars + target_var,
-    'Cognitive & Functional Assessment': cognitive_vars
-}
+# # Create correlation matrices for each category
+# categories = {
+#     'Demographic Variables': demographic_vars + target_var,
+#     'Lifestyle Variables': lifestyle_vars + target_var,
+#     'Medical History': medical_history_vars + target_var,
+#     'Vital Signs & Cholesterol': vital_signs_vars + target_var,
+#     'Cognitive & Functional Assessment': cognitive_vars
+# }
 
-for category_name, variables in categories.items():
-    # Filter variables that exist in the dataframe
-    existing_vars = [var for var in variables if var in alz_df.columns]
+# for category_name, variables in categories.items():
+#     # Filter variables that exist in the dataframe
+#     existing_vars = [var for var in variables if var in alz_df.columns]
     
-    if len(existing_vars) > 1:  # Need at least 2 variables to correlate
-        plt.figure(figsize=(12, 10))
-        corr_matrix = alz_df[existing_vars].corr()
+#     if len(existing_vars) > 1:  # Need at least 2 variables to correlate
+#         plt.figure(figsize=(12, 10))
+#         corr_matrix = alz_df[existing_vars].corr()
         
-        sns.heatmap(corr_matrix, 
-                   annot=True, 
-                   fmt='.2f', 
-                   cmap='coolwarm', 
-                   center=0,
-                   square=True,
-                   cbar_kws={'shrink': 0.8})
-        plt.title(f'Correlation Matrix: {category_name}', fontsize=14, fontweight='bold')
-        plt.tight_layout()
-        plt.show()
+#         sns.heatmap(corr_matrix, 
+#                    annot=True, 
+#                    fmt='.2f', 
+#                    cmap='coolwarm', 
+#                    center=0,
+#                    square=True,
+#                    cbar_kws={'shrink': 0.8})
+#         plt.title(f'Correlation Matrix: {category_name}', fontsize=14, fontweight='bold')
+#         plt.tight_layout()
+#         plt.show()
