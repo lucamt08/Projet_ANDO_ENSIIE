@@ -64,5 +64,6 @@ plt.show()
 # Correlation Heatmap
 corr_matrix=alz_df.corr()
 plt.figure(figsize=(30,15))
-sns.heatmap(corr_matrix,annot=True)
+sns.heatmap(corr_matrix,annot=True, annot_kws={"size" : 5})
+plt.show()
 
