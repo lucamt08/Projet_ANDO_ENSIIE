@@ -10,6 +10,8 @@ alz_df = pd.read_csv("alzheimer_data.csv")
 alz_df.drop('DoctorInCharge', axis=1, inplace=True)
 print(alz_df.head())
 
+print(alz_df.info())
+
 non_diagnosed_count = len(alz_df.loc[alz_df['Diagnosis'] == 0].index)
 diagnosed_count = len(alz_df.loc[alz_df['Diagnosis'] == 1].index)
 
@@ -49,12 +51,39 @@ plt.title('PCA - Alzheimer’s Data')
 plt.legend()
 plt.show()
 
-plt.figure(figsize=(6,4))
-sns.countplot(data=alz_df, x='FamilyHistoryAlzheimers', hue='Diagnosis', palette='coolwarm')
-plt.title('Family History vs Alzheimer’s Diagnosis')
-plt.xlabel('Family History of Alzheimer’s (0 = No, 1 = Yes)')
-plt.ylabel('Count')
-plt.legend(title='Diagnosis', labels=['Non-Diagnosed', 'Diagnosed'])
+# Diagnosis Distribution
+plt.figure(figsize=(8, 6))
+sns.countplot(x='Diagnosis', data=alz_df, palette='viridis')
+plt.title('Diagnosis Distribution (0: No Alzheimer\'s, 1: Alzheimer\'s)', fontsize=16)
+plt.xlabel('Diagnosis', fontsize=12)
+plt.ylabel('Count', fontsize=12)
+plt.xticks([0, 1], ['No Alzheimer\'s', 'Alzheimer\'s'])
+plt.show()
+
+# Bar Chart of Age Groups vs Diagnosis
+bins = [60, 70, 80, 90]  # Age ranges: 60-69, 70-79, 80-90
+labels = ['60-69', '70-79', '80-90']
+alz_df['AgeGroup'] = pd.cut(alz_df['Age'], bins=bins, labels=labels, right=False)
+# Count Alzheimer's cases per age group
+age_group_counts = alz_df.groupby('AgeGroup')['Diagnosis'].sum()  # Sum of 1s (Yes)
+# Make a bar chart
+plt.bar(labels, age_group_counts)
+plt.title('Alzheimer\'s Cases by Age Group')
+plt.xlabel('Age Group')
+plt.ylabel('Number of Alzheimer\'s Cases')
+plt.show()
+
+plt.figure(figsize=(8,6))
+plt.scatter(alz_df[alz_df['Diagnosis'] == 0].index, 
+            alz_df[alz_df['Diagnosis'] == 0]['FunctionalAssessment'], 
+            alpha=0.7, label='Non-Diagnosed', edgecolors='k')
+plt.scatter(alz_df[alz_df['Diagnosis'] == 1].index, 
+            alz_df[alz_df['Diagnosis'] == 1]['FunctionalAssessment'], 
+            alpha=0.7, label='Diagnosed', edgecolors='k')
+plt.xlabel('Patient Index')
+plt.ylabel('Functional Assessment Score')
+plt.title('Functional Assessment vs Alzheimer’s Diagnosis')
+plt.legend()
 plt.show()
 
 
