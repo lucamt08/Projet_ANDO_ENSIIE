@@ -53,7 +53,7 @@ plt.show()
 
 # Diagnosis Distribution
 plt.figure(figsize=(8, 6))
-sns.countplot(x='Diagnosis', data=alz_df, palette='viridis')
+sns.countplot(x='Diagnosis', hue='Diagnosis', data=alz_df, palette='viridis', legend=False)
 plt.title('Diagnosis Distribution (0: No Alzheimer\'s, 1: Alzheimer\'s)', fontsize=16)
 plt.xlabel('Diagnosis', fontsize=12)
 plt.ylabel('Count', fontsize=12)
@@ -64,5 +64,6 @@ plt.show()
 # Correlation Heatmap
 corr_matrix=alz_df.corr()
 plt.figure(figsize=(30,15))
-sns.heatmap(corr_matrix,annot=True)
+sns.heatmap(corr_matrix, annot=True, annot_kws={"size": 5})
+plt.show()
 
