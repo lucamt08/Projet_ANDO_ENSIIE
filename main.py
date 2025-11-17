@@ -159,6 +159,3 @@ print(correlations.head(11))  # Includes Diagnosis itself
 #         plt.title(f'Correlation Matrix: {category_name}', fontsize=14, fontweight='bold')
 #         plt.tight_layout()
 #         plt.show()
-
-# luca 
-
